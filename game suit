@@ -1,15 +1,16 @@
 #include <ncurses.h>
-#include <cstdlib>
-#include <ctime>
+#include <cstdlib> //memanggil fungsi rand()
+#include <ctime> // menghasilkan angka acak
 #include <fstream>
-#include <vector>
+#include <vector> //menyimpan riwayat permainan
 #include <string>
 #include <algorithm>
 #include <iostream>
-#include <thread>
-#include <chrono>
+#include <thread> //pengaturan waktu delay
+#include <chrono> //pengaturan waktu delay
 
 void showLoadingScreen() {
+//menggunakan Looping 
     const char* loadingText = "Loading";
     for (int i = 0; i < 10; ++i) {
         clear();
@@ -18,9 +19,10 @@ void showLoadingScreen() {
             printw(".");
         }
         refresh();
-        std::this_thread::sleep_for(std::chrono::milliseconds(300));
+        std::this_thread::sleep_for(std::chrono::milliseconds(300)); //memberikan jeda untuk efek animasi loading
     }
 }
+//fungsi untuk menentukan hasil suit
 std::string determineWinner(int playerChoice, int computerChoice) {
     // 0: Gunting, 1: Batu, 2: Kertas
     if (playerChoice == computerChoice) return "Seri";
@@ -29,8 +31,9 @@ std::string determineWinner(int playerChoice, int computerChoice) {
         (playerChoice == 2 && computerChoice == 1)) return "Pemain";
     return "Komputer";
 }
+//menggunakan file teks
 void saveHistoryToFile(const std::vector<std::string>& history) {
-    std::ofstream file("game_history.txt");
+    std::ofstream file("game_history.txt"); //file mode tulis
     for (const auto& entry : history) {
         file << entry << "\n";
     }
@@ -41,7 +44,7 @@ void saveHistoryToFile(const std::vector<std::string>& history) {
 void displayHistory() {
     clear();
     mvprintw(0, 0, "Histori Game:");
-    std::ifstream file("game_history.txt");
+    std::ifstream file("game_history.txt"); //file mode baca
     std::string line;
     int y = 1;
     while (std::getline(file, line)) {
