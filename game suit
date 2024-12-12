@@ -29,3 +29,26 @@ std::string determineWinner(int playerChoice, int computerChoice) {
         (playerChoice == 2 && computerChoice == 1)) return "Pemain";
     return "Komputer";
 }
+void saveHistoryToFile(const std::vector<std::string>& history) {
+    std::ofstream file("game_history.txt");
+    for (const auto& entry : history) {
+        file << entry << "\n";
+    }
+    file.close();
+}
+
+
+void displayHistory() {
+    clear();
+    mvprintw(0, 0, "Histori Game:");
+    std::ifstream file("game_history.txt");
+    std::string line;
+    int y = 1;
+    while (std::getline(file, line)) {
+        mvprintw(y++, 0, "%s", line.c_str());
+    }
+    file.close();
+    mvprintw(y + 1, 0, "Tekat Enter untuk kembali ke Menu.");
+    refresh();
+    getch();
+}
