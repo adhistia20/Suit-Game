@@ -52,3 +52,48 @@ void displayHistory() {
     refresh();
     getch();
 }
+void playGame() {
+    std::vector<std::string> history;
+    int playerScore = 0, computerScore = 0;
+
+    while (true) {
+        clear();
+        mvprintw(0, 0, "Game Suit! (0: Gunting, 1: Batu, 2: Kertas, 3: Exit)");
+        mvprintw(1, 0, "Score Pemain: %d | Score Komputer: %d", playerScore, computerScore);
+        mvprintw(3, 0, "Pilih langkah mu: ");
+        refresh();
+
+        int playerChoice = getch() - '0';
+        if (playerChoice == 3) break;
+
+        if (playerChoice < 0 || playerChoice > 2) {
+            mvprintw(5, 0, "Pilihan tidak tersedia! Tekan Spasi untuk kembali.");
+            refresh();
+            getch();
+            continue;
+        }
+
+        
+        int computerChoice = rand() % 3;
+        std::string result = determineWinner(playerChoice, computerChoice);
+
+    
+        if (result == "Pemain") playerScore++;
+        if (result == "Komputer") computerScore++;
+
+    
+        clear();
+        mvprintw(0, 0, "Pilihan mu: %s", playerChoice == 0 ? "Gunting" : playerChoice == 1 ? "Batu" : "Kertas");
+        mvprintw(1, 0, "Pilihan Komputer: %s", computerChoice == 0 ? "Gunting" : computerChoice == 1 ? "Batu" : "Kertas");
+        mvprintw(2, 0, "Hasil: %s", result.c_str());
+        refresh();
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+
+      
+        history.push_back("Pemain: " + std::to_string(playerChoice) + ", Komputer: " + 
+                          std::to_string(computerChoice) + ", Hasil: " + result);
+    }
+
+    
+    saveHistoryToFile(history);
+}
