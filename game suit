@@ -97,3 +97,40 @@ void playGame() {
     
     saveHistoryToFile(history);
 }
+int main() {
+    srand(time(0)); 
+    initscr();      
+    noecho();       
+    cbreak();       
+
+    showLoadingScreen();
+
+    while (true) {
+        clear();
+        mvprintw(0, 0, "1. Mulai Game");
+        mvprintw(1, 0, "2. Lihat Histori");
+        mvprintw(2, 0, "3. Keluar");
+        mvprintw(4, 0, "Tentukan Pilihan: ");
+        refresh();
+
+        int choice = getch() - '0';
+        if (choice == 3) break;
+
+        switch (choice) {
+            case 1:
+                playGame();
+                break;
+            case 2:
+                displayHistory();
+                break;
+            default:
+                mvprintw(6, 0, "Plihan Salah! Tekan space untuk memilih ulang.");
+                refresh();
+                getch();
+                break;
+        }
+    }
+
+    endwin(); 
+    return 0;
+}
