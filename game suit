@@ -33,7 +33,7 @@ std::string determineWinner(int playerChoice, int computerChoice) {
 }
 //menggunakan file teks
 void saveHistoryToFile(const std::vector<std::string>& history) {
-    std::ofstream file("game_history.txt"); //file mode tulis
+    std::ofstream file("history_game.txt"); //file mode tulis
     for (const auto& entry : history) {
         file << entry << "\n";
     }
@@ -44,7 +44,7 @@ void saveHistoryToFile(const std::vector<std::string>& history) {
 void displayHistory() {
     clear();
     mvprintw(0, 0, "History Game:");
-    std::ifstream file("game_history.txt"); //file mode baca
+    std::ifstream file("history_game.txt"); //file mode baca
     std::string line;
     int y = 1;
     while (std::getline(file, line)) {
