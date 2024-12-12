@@ -23,7 +23,7 @@ void showLoadingScreen() {
 }
 std::string determineWinner(int playerChoice, int computerChoice) {
     // 0: Gunting, 1: Batu, 2: Kertas
-    if (playerChoice == computerChoice) return "Draw";
+    if (playerChoice == computerChoice) return "Seri";
     if ((playerChoice == 0 && computerChoice == 2) || 
         (playerChoice == 1 && computerChoice == 0) || 
         (playerChoice == 2 && computerChoice == 1)) return "Pemain";
@@ -76,16 +76,14 @@ void playGame() {
         
         int computerChoice = rand() % 3;
         std::string result = determineWinner(playerChoice, computerChoice);
-
     
         if (result == "Pemain") playerScore++;
         if (result == "Komputer") computerScore++;
 
-    
         clear();
         mvprintw(0, 0, "Pilihan mu: %s", playerChoice == 0 ? "Gunting" : playerChoice == 1 ? "Batu" : "Kertas");
         mvprintw(1, 0, "Pilihan Komputer: %s", computerChoice == 0 ? "Gunting" : computerChoice == 1 ? "Batu" : "Kertas");
-        mvprintw(2, 0, "Hasil: %s", result.c_str());
+        mvprintw(2, 0, "Pemenang: %s", result.c_str());
         refresh();
         std::this_thread::sleep_for(std::chrono::seconds(2));
 
