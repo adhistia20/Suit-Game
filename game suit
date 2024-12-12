@@ -8,3 +8,16 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+
+void showLoadingScreen() {
+    const char* loadingText = "Loading";
+    for (int i = 0; i < 10; ++i) {
+        clear();
+        mvprintw(5, 10, "%s", loadingText);
+        for (int j = 0; j <= i % 4; ++j) {
+            printw(".");
+        }
+        refresh();
+        std::this_thread::sleep_for(std::chrono::milliseconds(300));
+    }
+}
