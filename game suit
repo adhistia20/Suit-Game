@@ -43,7 +43,7 @@ void saveHistoryToFile(const std::vector<std::string>& history) {
 
 void displayHistory() {
     clear();
-    mvprintw(0, 0, "Histori Game:");
+    mvprintw(0, 0, "History Game:");
     std::ifstream file("game_history.txt"); //file mode baca
     std::string line;
     int y = 1;
@@ -51,7 +51,7 @@ void displayHistory() {
         mvprintw(y++, 0, "%s", line.c_str());
     }
     file.close();
-    mvprintw(y + 1, 0, "Tekat Enter untuk kembali ke Menu.");
+    mvprintw(y + 1, 0, "Tekan Enter untuk kembali ke Menu.");
     refresh();
     getch();
 }
@@ -109,7 +109,7 @@ int main() {
     while (true) {
         clear();
         mvprintw(0, 0, "1. Mulai Game");
-        mvprintw(1, 0, "2. Lihat Histori");
+        mvprintw(1, 0, "2. Lihat History");
         mvprintw(2, 0, "3. Keluar");
         mvprintw(4, 0, "Tentukan Pilihan: ");
         refresh();
@@ -125,7 +125,7 @@ int main() {
                 displayHistory();
                 break;
             default:
-                mvprintw(6, 0, "Plihan Salah! Tekan space untuk memilih ulang.");
+                mvprintw(6, 0, "Plihan Salah! Tekan spasi untuk memilih ulang.");
                 refresh();
                 getch();
                 break;
