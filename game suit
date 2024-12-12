@@ -21,3 +21,11 @@ void showLoadingScreen() {
         std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }
 }
+std::string determineWinner(int playerChoice, int computerChoice) {
+    // 0: Gunting, 1: Batu, 2: Kertas
+    if (playerChoice == computerChoice) return "Draw";
+    if ((playerChoice == 0 && computerChoice == 2) || 
+        (playerChoice == 1 && computerChoice == 0) || 
+        (playerChoice == 2 && computerChoice == 1)) return "Pemain";
+    return "Komputer";
+}
